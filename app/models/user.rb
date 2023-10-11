@@ -20,7 +20,7 @@ class User < ApplicationRecord
             errors.add(:phone, "número de telefone fora do formato permitido")
         end
     end
-    
+
     def cpf_format
         # Define um vetor de formatos de CPF permitidos
         allowed_cpf_formats = [
@@ -63,7 +63,7 @@ class User < ApplicationRecord
         if resto2 < 2
             comp2 = 0
         else
-            comp2 = 11 - resto
+            comp2 = 11 - resto2 
         end
 
         cpf_digito_um = (cpf_int/10)%10
