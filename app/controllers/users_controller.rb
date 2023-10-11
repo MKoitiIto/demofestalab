@@ -4,6 +4,18 @@ class UsersController < ApplicationController
   # GET /users or /users.json
   def index
     @users = User.all
+    if params[:search_name].present?
+      @user = User.find_by(name: params[:search_name])
+    end
+    if params[:search_email].present?
+      @user = User.find_by(email: params[:search_email])
+    end
+    if params[:search_phone].present?
+      @user = User.find_by(phone: params[:search_phone])
+    end
+    if params[:search_cpf].present?
+      @user = User.find_by(cpf: params[:search_cpf])
+    end
   end
 
   # GET /users/1 or /users/1.json

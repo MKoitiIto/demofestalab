@@ -1,14 +1,59 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Users</h1>
+<h1>Search for a User</h1>
+<%= form_with(url: users_path, method: "get") do |form| %>
+  <%= form.text_field :search_name, placeholder: "nome do usuário" %>
+  <%= form.submit "Search" %>
+<% end %>
+<%= form_with(url: users_path, method: "get") do |form| %>
+  <%= form.text_field :search_email, placeholder: "email do usuário" %>
+  <%= form.submit "Search" %>
+<% end %>
+<%= form_with(url: users_path, method: "get") do |form| %>
+  <%= form.text_field :search_phone, placeholder: "telefone do usuário" %>
+  <%= form.submit "Search" %>
+<% end %>
+<%= form_with(url: users_path, method: "get") do |form| %>
+  <%= form.text_field :search_cpf, placeholder: "cpf do usuário" %>
+  <%= form.submit "Search" %>
+<% end %>
 
-<div id="users">
-  <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
+<% if @user %>
+  <h2>Search Results:</h2>
+  <% if @user.present? %>
+    <p>Name: <%= @user.name %></p>
+    <p>Email: <%= @user.email %></p>
+    <p>Phone: <%= @user.phone %></p>
+    <p>Cpf: <%= @user.cpf %></p>
+    <%= link_to "View User", @user %>
+  <% else %>
+    <p>Usuário não encontrado.</p>
   <% end %>
-</div>
+<% end %>
+
+<h1>List of Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>CPF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.phone %></td>
+        <td><%= user.cpf %></td>
+        <td><%= link_to "View User",  user %></td>
+      </tr>
+      
+    <% end %>
+  </tbody>
+</table>
 
 <%= link_to "New user", new_user_path %>
