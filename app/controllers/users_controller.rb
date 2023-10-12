@@ -4,17 +4,22 @@ class UsersController < ApplicationController
   # GET /users or /users.json
   def index
     @users = User.all
+    @user = nil # Initialize @user as nil to prevent it from carrying over from previous searches
+  
     if params[:search_name].present?
       @user = User.find_by(name: params[:search_name])
-    end
-    if params[:search_email].present?
+    elsif params[:search_email].present?
       @user = User.find_by(email: params[:search_email])
-    end
-    if params[:search_phone].present?
+    elsif params[:search_phone].present?
       @user = User.find_by(phone: params[:search_phone])
-    end
-    if params[:search_cpf].present?
+    elsif params[:search_cpf].present?
       @user = User.find_by(cpf: params[:search_cpf])
+    end
+  
+    if params[:search_name].present? || params[:search_email].present? || params[:search_phone].present? || params[:search_cpf].present?
+      unless @user
+        flash.now[:alert] = "Nenhum usuário encontrado."
+      end
     end
   end
 

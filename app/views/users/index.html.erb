@@ -18,6 +18,13 @@
   <%= form.submit "Search" %>
 <% end %>
 
+<% if flash[:alert] %>
+  <h2>Search Results:</h2>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
 <% if @user %>
   <h2>Search Results:</h2>
   <% if @user.present? %>
@@ -26,8 +33,6 @@
     <p>Phone: <%= @user.phone %></p>
     <p>Cpf: <%= @user.cpf %></p>
     <%= link_to "View User", @user %>
-  <% else %>
-    <p>Usuário não encontrado.</p>
   <% end %>
 <% end %>
 
